@@ -1,32 +1,54 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { db, auth } from '../firebase-config'
 import SendMessage from './SendMessage'
+import { collection, query,limit, orderBy, onSnapshot} from "firebase/firestore";
+import '../App.css'
 import SignOut from './SignOut'
-import { collection, getDocs,addDoc,updateDoc, doc,deleteDoc } from "firebase/firestore";
 
 function Chat() {
     const scroll = useRef()
     const [messages, setMessages] = useState([])
-    useEffect(() => {
-        db.collection('messages').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
-            setMessages(snapshot.docs.map(doc => doc.data()))
-        })
-    }, [])
+    const { userID } = auth.currentUser
+  
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt"),
+      limit(50)
+    );
+    const data = onSnapshot(q, (QuerySnapshot) => {
+      let messages = [];
+      QuerySnapshot.forEach((doc) => {
+        messages.push({ ...doc.data(), id: doc.id });
+      });
+      setMessages(messages)   
+      
+    });
+    return () => data;
+   
+  }, []);
+ 
     return (
-        <div>
+        <div className="container">
             <SignOut />
             <div className="msgs">
-                {messages.map(({ id, text, photoURL, uid }) => (
-                    <div>
-                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                            <img src={photoURL} alt="" />
-                            <p>{text}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <SendMessage scroll={scroll} />
-            <div ref={scroll}></div>
+
+        
+              {messages && messages.map((message, id, uid, photoURL) => 
+                <div>
+                <div key={id} className={`msg ${userID === auth.currentUser.uid ? 'received' : 'sent'}`}>
+                  <img src={message.photoURL} />
+                  <p>{message.text}</p>
+
+                </div>
+                </div>
+              )}     
+           </div>
+          
+          
+          <SendMessage />
+
         </div>
     )
 }

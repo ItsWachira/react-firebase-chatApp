@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { signInWithPopup} from "firebase/auth";
 import {auth, provider} from '../firebase-config'
 import Button from '@mui/material/Button';
- 
+import '../App.css'
 
 
 function SignIn() {
