@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { db, auth, app } from '../firebase-config'
-import {useCollection} from 'react-firebase-hooks/firestore'
 import { collection,addDoc,query,limit, serverTimestamp, orderBy} from "firebase/firestore";
 import '../App.css'
 
 function SendMessage({ scroll }) {
     const [msg, setMsg] = useState('')
     const messagesRef = collection(db, "messages");
-    const queryRef = query(messagesRef, orderBy("createdAt"), limit(25));
-    const [messages] = useCollection(queryRef, {idField: "id"})
+ 
 
 
 
