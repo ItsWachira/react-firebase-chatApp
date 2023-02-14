@@ -12,7 +12,7 @@ function SendMessage({ scroll }) {
 
 
 
-       const sendMessage = async (e) => {
+       const sendMsg = async (e) => {
         const { uid, photoURL } = auth.currentUser
 
         
@@ -36,7 +36,7 @@ function SendMessage({ scroll }) {
                     onChange={(e) => setMsg(e.target.value)} />
 
                     <button style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 5% -13px 5%', maxWidth: '200px', borderRadius: '12px', background: '#8EC1D6'}} type="submit"
-                    onClick={sendMessage}
+                    onClick={sendMsg}
                     >Send</button>
                 </div>
        

@@ -3,7 +3,7 @@ import { db, auth } from '../firebase-config'
 import SendMessage from './SendMessage'
 import { collection, query,limit, orderBy, onSnapshot} from "firebase/firestore";
 import '../App.css'
-import SignOut from './SignOut'
+
 
 function Chat() {
     const scroll = useRef()
@@ -31,7 +31,12 @@ function Chat() {
  
     return (
         <div className="container">
-            <SignOut />
+             <button 
+             onClick={() => auth.signOut()}
+             style={{ width: '100%', fontSize: '15px', fontWeight: '550', marginLeft: '5px', marginBottom: '-3px' }} 
+             
+             
+             >Sign Out</button>
             <div className="msgs">
 
         
