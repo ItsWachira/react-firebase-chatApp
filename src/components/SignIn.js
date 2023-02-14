@@ -1,7 +1,7 @@
 import React from 'react';
 import { signInWithPopup} from "firebase/auth";
 import {auth, provider} from '../firebase-config'
-import '../App.css'
+
 
 
 function SignIn() {
