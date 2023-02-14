@@ -30,7 +30,7 @@ function Chat() {
   }, []);
  
     return (
-        <div className="container">
+        <div>
              <button 
              onClick={() => auth.signOut()}
              style={{ width: '100%', fontSize: '15px', fontWeight: '550', marginLeft: '5px', marginBottom: '-3px' }} 
