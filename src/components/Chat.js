@@ -6,7 +6,6 @@ import '../App.css'
 
 
 function Chat() {
-    const scroll = useRef()
     const [messages, setMessages] = useState([])
     const { userID } = auth.currentUser
   
